@@ -1,10 +1,12 @@
+import * as React from 'react';
 import { useState, useEffect } from "react";
 import {db} from "./firebase-config";
-import {collection, getDocs, addDoc, updateDoc, doc} from "firebase/firestore";
-import { StyleSheet, Text, TextInput, View, Alert, Button, Image, ScrollView} from 'react-native';
+import {collection, getDocs} from "firebase/firestore";
+import { StyleSheet, Text, TextInput, View, Alert, Button, Image} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-
-function App() {
+function HomeScreen() {
   //Function for collecting db data
   const [users, setUsers] = useState([]);
   const UsersCollectionRef = collection(db, "users");
@@ -23,11 +25,6 @@ function App() {
   return (
   <View style={styles.container} className="App">
     <Image source={require('/Users/sspai/Documents/ParkingApp/ParkingApp/assets/University_of_Pittsburgh.png')} />
-    {/* Searching users */}
-    {/* <Text style = {textStyle}>Enter Tag Here:</Text> */}
-    {/* <TextInput placeholder="Tag" style = {boxStyle2} */}
-    {/* onChange={(event) => {setNewTag(event.target.value)}}> */}
-    {/* </TextInput> */}
     <Text style = {textStyle}>Enter license plate number:</Text>
     <TextInput placeholder="Plate" style = {boxStyle1}
     onChange={(event) => {setNewPlateNumber(event.target.value)}}>
@@ -40,6 +37,22 @@ function App() {
       <Text style = {stylefooter}></Text>
       {/* <StatusBar style="auto" /> */}
       </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: 'Overview' }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
