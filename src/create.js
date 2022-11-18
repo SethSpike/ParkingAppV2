@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import {db} from "./firebase-config";
+import {db} from "./../firebase-config";
 import {collection, getDocs, addDoc, updateDoc, doc, deleteDoc} from "firebase/firestore";
 import { StyleSheet, Text, TextInput, View, Button, Image, ScrollView} from 'react-native';
 
 
-function App() {
+export function Create() {
   //Function for adding new user info
   const [newTag, setNewTag] = useState(0);
   const [newPlateNumber, setNewPlateNumber] = useState("");
@@ -37,7 +37,8 @@ function App() {
   }, []);
 
   return (
-  <View style={styles.container} className="App">
+  <View style={styles.container} className="Creation">
+    <ScrollView>
     <Image source={require('/Users/sspai/Documents/ParkingApp/ParkingApp/assets/University_of_Pittsburgh.png')} />
     {/* Buttons for adding users */}
     <TextInput style = {TextStyle2} placeholder="Tag"
@@ -69,6 +70,7 @@ function App() {
       </View>
     );
   })}
+      </ScrollView>
       </View>
   );
 }
@@ -84,6 +86,7 @@ const TextStyle1 = {
   borderWidth: 1.0,
   backgroundColor: 'white',
   marginTop: 10,
+  marginLeft: 75,
   marginBottom: 15,
   width: 150,
 }
@@ -92,6 +95,7 @@ const TextStyle2 = {
   borderWidth: 1.0,
   backgroundColor: 'white',
   marginTop: 10,
+  marginLeft: 100,
   marginBottom: 20,
   width: 100,
 }
@@ -105,5 +109,3 @@ const styles = StyleSheet.create({
     paddingTop: 100
   },
 });
-
-export default App;

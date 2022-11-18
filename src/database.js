@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import {db} from "./firebase-config";
+import {db} from "./../firebase-config";
 import {collection, getDocs, addDoc, updateDoc, doc, deleteDoc} from "firebase/firestore";
 import { StyleSheet, Text, View, Button, Image, ScrollView} from 'react-native';
 
 
-function App() {
+export function Database() {
   //Function for collecting db data
   const [users, setUsers] = useState([]);
   const UsersCollectionRef = collection(db, "users");
@@ -78,5 +78,3 @@ const styles = StyleSheet.create({
       paddingTop: 100
     },
 });
-
-export default App;
