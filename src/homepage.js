@@ -23,44 +23,19 @@ export function HomePage() {
   return (
   <View style={styles.container} className="HomeScreen">
     <Image source={require('/Users/sspai/Documents/ParkingApp/ParkingApp/assets/University_of_Pittsburgh.png')} />
-    <Text style = {textStyle}>Enter license plate number:</Text>
-    <TextInput placeholder="Plate" style = {boxStyle1}
+    <Text style = {styles.textStyle}>Enter license plate number:</Text>
+    <TextInput placeholder="Plate" style = {styles.boxStyle1}
     onChange={(event) => {setNewPlateNumber(event.target.value)}}>
     </TextInput>
-    <Text style = {textStyle}>Enter State Here:</Text>
-    <TextInput placeholder="State" style = {boxStyle2}
+    <Text style = {styles.textStyle}>Enter State Here:</Text>
+    <TextInput placeholder="State" style = {styles.boxStyle2}
     onChange={(event) => {setNewState(event.target.value)}}>
     </TextInput>
     <Button title="Submit" onPress={() => Alert.alert('Information Submitted')}/>
-      <Text style = {stylefooter}></Text>
+      <Text style = {styles.stylefooter}></Text>
       {/* <StatusBar style="auto" /> */}
       </View>
   );
-}
-
-const textStyle = {
-  marginTop: 20,
-  color: 'white',
-}
-
-const stylefooter = {
-  marginTop: 100
-}
-
-const boxStyle1 = {
-  borderWidth: 1.0,
-  backgroundColor: 'white',
-  marginTop: 10,
-  marginBottom: 15,
-  width: 150,
-}
-
-const boxStyle2 = {
-  borderWidth: 1.0,
-  backgroundColor: 'white',
-  marginTop: 10,
-  marginBottom: 20,
-  width: 100,
 }
 
 const styles = StyleSheet.create({
@@ -69,6 +44,26 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 100
   },
+  textStyle: {
+    marginTop: 20,
+    color: 'white',
+  },
+  stylefooter: {
+    marginTop: 100
+  },
+  boxStyle1: {
+    borderWidth: 1.0,
+    backgroundColor: 'white',
+    marginTop: 10,
+    marginBottom: 15,
+    width: 150,
+  },
+  boxStyle2: {
+    borderWidth: 1.0,
+    backgroundColor: 'white',
+    marginTop: 10,
+    marginBottom: 20,
+    width: 100,
+  }
 });

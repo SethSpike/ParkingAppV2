@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import {db} from "./../firebase-config";
-import {collection, getDocs, addDoc, updateDoc, doc, deleteDoc} from "firebase/firestore";
-import { StyleSheet, Text, TextInput, View, Button, Image, ScrollView} from 'react-native';
+import {collection, getDocs, addDoc, doc} from "firebase/firestore";
+import { StyleSheet, TextInput, View, Button, Image, ScrollView} from 'react-native';
 
 
 export function Create() {
@@ -16,13 +16,7 @@ export function Create() {
   
   //Create new entry
   const createUser = async () => {
-    await addDoc(UsersCollectionRef, {Tag: Number(newTag), PlateNumber: newPlateNumber, State: newState})
-  };
-
-  //Delete User
-  const deleteUser = async (id) => {
-    const userDoc = doc(db, "users", id)
-    await deleteDoc(userDoc)
+    await addDoc(UsersCollectionRef, {Tag: Number(newTag), PlateNumber: newPlateNumber, State: newState, Type: newType})
   };
 
   //Displaying information from the database
@@ -38,66 +32,28 @@ export function Create() {
 
   return (
   <View style={styles.container} className="Creation">
-    <ScrollView>
+    <ScrollView> 
     <Image source={require('/Users/sspai/Documents/ParkingApp/ParkingApp/assets/University_of_Pittsburgh.png')} />
-    {/* Buttons for adding users */}
-    <TextInput style = {TextStyle2} placeholder="Tag"
+    {/* Text fields for adding users */}
+    <TextInput style = {styles.TextStyle2} placeholder="Tag"
     onChange={(event) => {setNewTag(event.target.value)}}>
     </TextInput>
-    <TextInput style = {TextStyle2} placeholder="State"
+    <TextInput style = {styles.TextStyle2} placeholder="State"
     onChange={(event) => {setNewState(event.target.value)}}>
     </TextInput>
-    <TextInput style = {TextStyle1} placeholder="Plate"
+    <TextInput style = {styles.TextStyle1} placeholder="Plate"
     onChange={(event) => {setNewPlateNumber(event.target.value)}}>
     </TextInput>
-    <Button 
+    <TextInput style = {styles.TextStyle3} placeholder="Type"
+    onChange={(event) => {setNewType(event.target.value)}}>
+    </TextInput>
+    {/* Button to add users */}
+    <Button
     onPress={createUser}title="Add User">
     </Button>
-    
-    {/* Displays db data */}
-    {users.map((users) => { 
-      return (
-      <View>
-        <Text style = {TextStyle}>{" "}</Text>
-        <Text style = {TextStyle}>Tag: {users.Tag}</Text>
-        <Text style = {TextStyle}>State: {users.State}</Text>
-        <Text style = {TextStyle}>Plate: {users.PlateNumber}</Text>
-        
-        {/* Delete Button */}
-        <Button 
-        onPress={() => {deleteUser(users.id)}}title="Delete">
-        </Button>
-      </View>
-    );
-  })}
       </ScrollView>
       </View>
   );
-}
-
-const TextStyle = {
-  color: 'white',
-  marginTop: 10,
-  marginBottom: 15,
-  width: 150,
-}
-
-const TextStyle1 = {
-  borderWidth: 1.0,
-  backgroundColor: 'white',
-  marginTop: 10,
-  marginLeft: 75,
-  marginBottom: 15,
-  width: 150,
-}
-
-const TextStyle2 = {
-  borderWidth: 1.0,
-  backgroundColor: 'white',
-  marginTop: 10,
-  marginLeft: 100,
-  marginBottom: 20,
-  width: 100,
 }
 
 const styles = StyleSheet.create({
@@ -106,6 +62,31 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 100
+  },
+  TextStyle: {
+    color: 'white',
+    width: 150,
+  },
+  TextStyle1: {
+    borderWidth: 1.0,
+    backgroundColor: 'white',
+    marginTop: 10,
+    marginLeft:75,
+    width: 150,
+  },
+  TextStyle2: {
+    borderWidth: 1.0,
+    backgroundColor: 'white',
+    marginTop: 10,
+    marginLeft: 100,
+    width: 100,
+  },
+  TextStyle3: {
+    borderWidth: 1.0,
+    backgroundColor: 'white',
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: 75,
+    width: 150,
   },
 });

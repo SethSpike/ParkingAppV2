@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import {db} from "./../firebase-config";
-import {collection, getDocs, addDoc, updateDoc, doc, deleteDoc} from "firebase/firestore";
+import {collection, getDocs, updateDoc, doc, deleteDoc} from "firebase/firestore";
 import { StyleSheet, Text, View, Button, Image, ScrollView} from 'react-native';
 
 
@@ -41,10 +41,11 @@ export function Database() {
     {users.map((users) => { 
       return (
       <View>
-        <Text style = {textStyle}>{" "}</Text>
-        <Text style = {textStyle}>Tag: {users.Tag}</Text>
-        <Text style = {textStyle}>Plate: {users.PlateNumber}</Text>
-        <Text style = {textStyle}>State: {users.State}</Text>
+        <Text style = {styles.textStyle}>{" "}</Text>
+        <Text style = {styles.textStyle}>Tag: {users.Tag}</Text>
+        <Text style = {styles.textStyle}>Plate: {users.PlateNumber}</Text>
+        <Text style = {styles.textStyle}>State: {users.State}</Text>
+        <Text style = {styles.textStyle}>Type: {users.Type}</Text>
         
         {/* Up Tag value by one */}
         <Button 
@@ -63,18 +64,15 @@ export function Database() {
   );
 }
 
-const textStyle = {
-  marginTop: 25,
-  color: 'white',
-  marginBottom: 10
-}
-
 const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: 'black',
       alignItems: 'center',
       justifyContent: 'center',
-      paddingTop: 100
     },
+    textStyle: {
+      color: 'white',
+      marginBottom: 10
+    }
 });
