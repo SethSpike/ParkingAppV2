@@ -1,58 +1,45 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import {db} from "./../firebase-config";
-import {collection, getDocs, addDoc, doc} from "firebase/firestore";
-import { StyleSheet, TextInput, View, Button, Image, ScrollView} from 'react-native';
+import {collection, addDoc, doc} from "firebase/firestore";
+import { StyleSheet, TextInput, View, Button, Image} from 'react-native';
 
 
 export function Create() {
   //Function for adding new user info
   const [newTag, setNewTag] = useState(0);
-  const [newPlateNumber, setNewPlateNumber] = useState("");
+  const [newPlate, setNewPlate] = useState("");
   const [newState, setNewState] = useState("");
+  const [newType, setNewType] = useState("");
 
   //Function for collecting db data
-  const [users, setUsers] = useState([]);
   const UsersCollectionRef = collection(db, "users");
   
   //Create new entry
   const createUser = async () => {
-    await addDoc(UsersCollectionRef, {Tag: Number(newTag), PlateNumber: newPlateNumber, State: newState, Type: newType})
+    await addDoc(UsersCollectionRef, {Tag: Number(newTag), Plate: newPlate, State: newState, Type: newType})
   };
 
-  //Displaying information from the database
-  useEffect(() => {
-    const getUsers = async () => {
-      const data = await getDocs(UsersCollectionRef);
-      setUsers(data.docs.map((doc) => ({...doc.data(), id: doc.id })));
-      console.log(data);
-    }
-
-    getUsers();
-  }, []);
-
   return (
-  <View style={styles.container} className="Creation">
-    <ScrollView> 
+  <View style={styles.container}>
     <Image source={require('/Users/sspai/Documents/ParkingApp/ParkingApp/assets/University_of_Pittsburgh.png')} />
     {/* Text fields for adding users */}
-    <TextInput style = {styles.TextStyle2} placeholder="Tag"
+    <TextInput style = {styles.TextStyle2} placeholder=" Tag"
     onChange={(event) => {setNewTag(event.target.value)}}>
     </TextInput>
-    <TextInput style = {styles.TextStyle2} placeholder="State"
+    <TextInput style = {styles.TextStyle2} placeholder=" State"
     onChange={(event) => {setNewState(event.target.value)}}>
     </TextInput>
-    <TextInput style = {styles.TextStyle1} placeholder="Plate"
-    onChange={(event) => {setNewPlateNumber(event.target.value)}}>
+    <TextInput style = {styles.TextStyle1} placeholder=" Plate"
+    onChange={(event) => {setNewPlate(event.target.value)}}>
     </TextInput>
-    <TextInput style = {styles.TextStyle3} placeholder="Type"
+    <TextInput style = {styles.TextStyle3} placeholder=" Type"
     onChange={(event) => {setNewType(event.target.value)}}>
     </TextInput>
     {/* Button to add users */}
     <Button
     onPress={createUser}title="Add User">
     </Button>
-      </ScrollView>
-      </View>
+  </View>
   );
 }
 
@@ -61,7 +48,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'black',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   TextStyle: {
     color: 'white',
@@ -71,14 +57,12 @@ const styles = StyleSheet.create({
     borderWidth: 1.0,
     backgroundColor: 'white',
     marginTop: 10,
-    marginLeft:75,
     width: 150,
   },
   TextStyle2: {
     borderWidth: 1.0,
     backgroundColor: 'white',
     marginTop: 10,
-    marginLeft: 100,
     width: 100,
   },
   TextStyle3: {
@@ -86,7 +70,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     marginTop: 10,
     marginBottom: 10,
-    marginLeft: 75,
     width: 150,
   },
 });

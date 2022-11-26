@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import {db} from "./../firebase-config";
 import {collection, getDocs, updateDoc, doc, deleteDoc} from "firebase/firestore";
 import { StyleSheet, Text, View, Button, Image, ScrollView} from 'react-native';
@@ -34,7 +34,7 @@ export function Database() {
   }, []);
 
   return (
-  <View style={styles.container} className="App">
+  <View style={styles.container}>
     <ScrollView>
     <Image source={require('/Users/sspai/Documents/ParkingApp/ParkingApp/assets/University_of_Pittsburgh.png')} />
     {/* Displays db data */}
@@ -43,7 +43,7 @@ export function Database() {
       <View>
         <Text style = {styles.textStyle}>{" "}</Text>
         <Text style = {styles.textStyle}>Tag: {users.Tag}</Text>
-        <Text style = {styles.textStyle}>Plate: {users.PlateNumber}</Text>
+        <Text style = {styles.textStyle}>Plate: {users.Plate}</Text>
         <Text style = {styles.textStyle}>State: {users.State}</Text>
         <Text style = {styles.textStyle}>Type: {users.Type}</Text>
         
@@ -74,5 +74,5 @@ const styles = StyleSheet.create({
     textStyle: {
       color: 'white',
       marginBottom: 10
-    }
+    },
 });

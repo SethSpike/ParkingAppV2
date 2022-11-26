@@ -5,32 +5,25 @@ import {collection, getDocs} from "firebase/firestore";
 import { StyleSheet, Text, TextInput, View, Alert, Button, Image} from 'react-native';
 
 export function HomePage() {
+//Function for finding user info
+const [findPlate, setFindPlate] = useState("");
+const [findState, setFindState] = useState("");
+
   //Function for collecting db data
   const [users, setUsers] = useState([]);
   const UsersCollectionRef = collection(db, "users");
 
-  //Displaying information from the database
-  useEffect(() => {
-    const getUsers = async () => {
-      const data = await getDocs(UsersCollectionRef);
-      setUsers(data.docs.map((doc) => ({...doc.data(), id: doc.id })));
-      console.log(data);
-    }
-
-    getUsers();
-  }, []);
-
   return (
-  <View style={styles.container} className="HomeScreen">
+  <View style={styles.container}>
     <Image source={require('/Users/sspai/Documents/ParkingApp/ParkingApp/assets/University_of_Pittsburgh.png')} />
     <Text style = {styles.textStyle}>Enter license plate number:</Text>
     <TextInput placeholder="Plate" style = {styles.boxStyle1}
-    onChange={(event) => {setNewPlateNumber(event.target.value)}}>
+    onChange={(event) => {setFindPlate(event.target.value)}}>
     </TextInput>
-    <Text style = {styles.textStyle}>Enter State Here:</Text>
+    {/* <Text style = {styles.textStyle}>Enter State Here:</Text>
     <TextInput placeholder="State" style = {styles.boxStyle2}
-    onChange={(event) => {setNewState(event.target.value)}}>
-    </TextInput>
+    onChange={(event) => {setFindState(event.target.value)}}>
+    </TextInput> */}
     <Button title="Submit" onPress={() => Alert.alert('Information Submitted')}/>
       <Text style = {styles.stylefooter}></Text>
       {/* <StatusBar style="auto" /> */}
@@ -43,7 +36,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'black',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   textStyle: {
     marginTop: 20,

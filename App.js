@@ -12,7 +12,7 @@ function LandingPage({navigation}) {
 return (
   <View style={styles.container} className="App">
     <Image style={styles.logo} source={require('/Users/sspai/Documents/ParkingApp/ParkingApp/assets/University_of_Pittsburgh.png')} />
-    <Button style={styles.button} title="Search" onPress={() => navigation.navigate('Search')}/>
+    <Button title="Search" onPress={() => navigation.navigate('Search')}/>
     <Button title="Database" onPress={() => navigation.navigate('Database')}/>
     <Button title="Create" onPress={() => navigation.navigate('Create')}/>
     <Button title="Parking Map" onPress={() => navigation.navigate('Parking Map')}/>
@@ -67,14 +67,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'black',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   logo: {
-    marginTop: -250,
     marginBottom: 50
-  },
-  button: {
-    marginBottom: 100
   }
 });
 
