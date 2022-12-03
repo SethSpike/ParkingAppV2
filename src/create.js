@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState} from "react";
 import {db} from "./../firebase-config";
 import {collection, addDoc, doc} from "firebase/firestore";
 import { StyleSheet, TextInput, View, Button, Image} from 'react-native';
@@ -16,7 +16,7 @@ export function Create() {
   
   //Create new entry
   const createUser = async () => {
-    await addDoc(UsersCollectionRef, {Tag: Number(newTag), Plate: newPlate, State: newState, Type: newType})
+    await addDoc(UsersCollectionRef, {Tag: newTag, Plate: newPlate, State: newState, Type: newType})
   };
 
   return (
